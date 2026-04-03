@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>PPEC Council Islamabad | Online Verification Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    
+    <style>
+        :root { --ppec-green: #056A58; --ppec-dark: #044d40; }
+        body { font-family: 'Poppins', sans-serif; background-color: #f4f7f6; color: #333; }
+        
+        /* Updated Top Header: 50px & Centered */
+        .top-bar { background: #fff; padding: 15px 0; border-bottom: 1px solid #eee; }
+        .navbar-brand-img { height: 70px; width: auto; display: block; margin: 0 auto; }
+
+        /* Navigation & Hover Dropdown */
+        .bg-ppec { background-color: var(--ppec-green) !important; }
+        .nav-link { color: white !important; font-weight: 500; text-transform: uppercase; padding: 12px 15px !important; font-size: 13px; }
+        
+        /* Dropdown on Hover */
+        .nav-item.dropdown:hover .dropdown-menu { display: block; margin-top: 0; }
+        .dropdown-menu { background-color: var(--ppec-green); border: none; border-radius: 0; display: none; }
+        .dropdown-item { color: white !important; font-size: 12px; text-transform: uppercase; padding: 10px 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .dropdown-item:hover { background-color: var(--ppec-dark); }
+
+        /* Page Display Logic */
+        .page-section { display: none; }
+        .active-section { display: block; }
+
+        /* Hero */
+        .hero-section {
+            background: linear-gradient(rgba(5, 106, 88, 0.8), rgba(5, 106, 88, 0.8)), url('https://ppec.pk/images/bg_3.jpg');
+            background-size: cover; height: 380px; display: flex; align-items: center; color: white; text-align: center;
+        }
+
+        /* Search Card */
+        .search-container { padding: 70px 0; min-height: 500px; }
+        .search-card { 
+            background: #fff; padding: 40px; border-radius: 4px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 5px solid var(--ppec-green);
+        }
+        .btn-verify { background: var(--ppec-green); color: white; border: none; padding: 14px; width: 100%; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-verify:hover { background: var(--ppec-dark); }
+
+        /* Transcript Design */
+        .transcript-box {
+            border: 10px double var(--ppec-green); padding: 40px; background: white;
+            position: relative; margin: 0 auto; max-width: 850px; box-shadow: 0 0 40px rgba(0,0,0,0.1);
+        }
+        .transcript-box::before {
+            content: ""; background: url('https://ppec.pk/images/logo.png') no-repeat center;
+            background-size: 35%; opacity: 0.05; position: absolute; top:0; left:0; right:0; bottom:0; pointer-events: none;
+        }
+        .info-label { color: var(--ppec-green); font-weight: 700; text-transform: uppercase; font-size: 11px; display: block; }
+        .info-value { font-weight: 700; border-bottom: 1px solid #eee; display: block; padding-bottom: 3px; margin-bottom: 15px; font-size: 14px; color: #000; }
+        
+        .table-ppec thead { background: var(--ppec-green); color: white; }
+        .table-ppec td, .table-ppec th { border: 1px solid var(--ppec-green) !important; padding: 10px; }
+
+        .qr-box { width: 110px; height: 110px; border: 1px solid #ddd; padding: 5px; margin: 0 auto; background: #fff; }
+        .sig-area { width: 220px; border-top: 2px solid #333; text-align: center; font-weight: bold; margin-top: 40px; }
+
+        @media print {
+            .no-print { display: none !important; }
+            .transcript-box { border: 8px solid var(--ppec-green); width: 100%; margin: 0; padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar no-print">
+        <div class="container text-center">
+            <a href="#" onclick="showPage('home-page')">
+                <img src="https://ppec.pk/images/letter-head-h.png" class="navbar-brand-img" alt="PPEC Logo">
+            </a>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-ppec sticky-top no-print">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ppecNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="ppecNav">
+                <ul class="navbar-nav m-auto">
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('home-page')">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Affiliated Institutes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Trades</a></li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#">E-Services</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#" onclick="showPage('search-page')">Verification</a>
+                            <a class="dropdown-item" href="#">Challan</a>
+                            <a class="dropdown-item" href="#">Downloads</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link" href="#">Apply Online</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="home-page" class="page-section active-section">
+        <div class="hero-section">
+            <div class="container">
+                <h1 class="display-4 font-weight-bold">Skills Verification Portal</h1>
+                <p class="lead">Official Pakistan Paramedical & Engineering Council Islamabad</p>
+                <button class="btn btn-warning btn-lg px-5 mt-3 font-weight-bold" onclick="showPage('search-page')">ONLINE VERIFICATION</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="search-page" class="page-section">
+        <div class="search-container">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-5">
+                        <div class="search-card">
+                            <h4 class="text-center font-weight-bold mb-4" style="color: var(--ppec-green);">STUDENT VERIFICATION</h4>
+                            <div class="form-group">
+                                <label class="font-weight-bold">Enter Roll Number:</label>
+                                <input type="text" id="rollInput" class="form-control form-control-lg text-center">
+                            </div>
+                            <button class="btn-verify btn-lg" onclick="handleSearch()">SEARCH RECORD</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="result-page" class="page-section">
+        <div class="container py-4">
+            <div class="transcript-box">
+                <div class="text-center mb-4">
+                    <img src="https://ppec.pk/images/letter-head-h.png" style="height: 50px;">
+                    <h5 class="mt-3 font-weight-bold" style="color: var(--ppec-green); border-bottom: 2px solid; display: inline-block;">DETAILED MARKS CERTIFICATE / TRANSCRIPT</h5>
+                </div>
+
+                <div class="row px-2">
+                    <div class="col-6">
+                        <span class="info-label">Candidate Name</span><span id="rName" class="info-value"></span>
+                        <span class="info-label">Father Name</span><span id="rFather" class="info-value"></span>
+                        <span class="info-label">Institute Name</span><span id="rInst" class="info-value"></span>
+                    </div>
+                    <div class="col-6">
+                        <span class="info-label">Roll Number</span><span id="rRoll" class="info-value"></span>
+                        <span class="info-label">Registration No</span><span id="rReg" class="info-value"></span>
+                        <span class="info-label">Trade / Course</span><span id="rTrade" class="info-value"></span>
+                        <span class="info-label">Session</span><span id="rSession" class="info-value"></span>
+                    </div>
+                </div>
+
+                <div class="table-responsive mt-2">
+                    <table class="table table-ppec text-center">
+                        <thead><tr><th>Subject Category</th><th>Total</th><th>Obtained</th></tr></thead>
+                        <tbody id="marksBody"></tbody>
+                    </table>
+                </div>
+
+                <div class="row no-gutters text-center border font-weight-bold bg-light">
+                    <div class="col-4 p-2 border-right">GRADE: <span id="rGrade"></span></div>
+                    <div class="col-4 p-2 border-right">PERCENTAGE: <span id="rPerc"></span></div>
+                    <div class="col-4 p-2 text-success">RESULT: PASSED</div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-end mt-5">
+                    <div class="text-center">
+                        <div class="qr-box"><img id="qrImage" src="" style="width:100%"></div>
+                        <p class="small font-weight-bold mt-1 mb-0">VERIFIED RECORD</p>
+                    </div>
+                    <div class="sig-area">Controller of Examinations</div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4 no-print">
+                <button class="btn btn-success btn-lg px-5" onclick="window.print()">Print Transcript</button>
+                <button class="btn btn-outline-dark btn-lg ml-2" onclick="showPage('search-page')">New Search</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-ppec py-3 text-white text-center mt-5 no-print">
+        <p class="mb-0 small">© 2026 Pakistan Paramedical & Engineering Council Islamabad. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script>
+        const database = {
+            "78410": {
+                name: "NIHAL KHAN", father: "ABID KHAN", inst: "COLLEGE OF TECHNOLOGY KARACHI",
+                roll: "78410", reg: "PPEC/PEC/23E", trade: "AIR CONDITIONER TECHNICIAN",
+                theory: "1020", prac: "605", total: "1626", perc: "81.3%", grade: "A+", 
+                Session: "2023 to 2025"
+            }
+        };
+
+        function showPage(id) {
+            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active-section'));
+            document.getElementById(id).classList.add('active-section');
+            window.scrollTo(0,0);
+        }
+
+        function handleSearch() {
+            const roll = document.getElementById('rollInput').value.trim();
+            const s = database[roll];
+
+            if (s) {
+                document.getElementById('rName').innerText = s.name;
+                document.getElementById('rFather').innerText = s.father;
+                document.getElementById('rInst').innerText = s.inst;
+                document.getElementById('rRoll').innerText = s.roll;
+                document.getElementById('rReg').innerText = s.reg;
+                document.getElementById('rTrade').innerText = s.trade;
+                document.getElementById('rSession').innerText = s.Session;
+                document.getElementById('rGrade').innerText = s.grade;
+                document.getElementById('rPerc').innerText = s.perc;
+
+                document.getElementById('marksBody').innerHTML = `
+                    <tr><td class="text-left">Theory Examination</td><td>1250</td><td>${s.theory}</td></tr>
+                    <tr><td class="text-left">Practical / Workshop / Viva</td><td>750</td><td>${s.prac}</td></tr>
+                    <tr class="font-weight-bold" style="background:#f9f9f9;"><td class="text-left">GRAND TOTAL</td><td>2000</td><td>${s.total}</td></tr>
+                `;
+
+                const qrText = `PPEC VERIFIED RECORD%0AName: ${s.name}%0ARoll: ${s.roll}%0ATrade: ${s.trade}%0ASession: ${s.Session}`;
+                document.getElementById('qrImage').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${qrText}`;
+
+                showPage('result-page');
+            } else {
+                alert("Roll Number not found in PPEC records.");
+            }
+        }
+    </script>
+</body>
+</html>
